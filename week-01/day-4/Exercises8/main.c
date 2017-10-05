@@ -11,8 +11,13 @@ int a;
 a = 0;
 
     while (a <= 100) {
-        printf("%d\n", a);
+       // printf("%d\n", a);
         a++;
+
+        if(a % 2 == 0)
+            printf("Even\n");
+
+        else printf("Odd\n");
 
     }
 
