@@ -7,21 +7,20 @@ int main() {
 
 	result = number + 23;
 
-	printf("%d\n", result);
-	// Check the result with printf
 
- 	// What happened?! uint8_t = 0-255. After that it starts again.
+	// Check the result with printf
+    printf("uint8_t numbers are located between 0 and 255. After that the counting starts again and the result  = %d\n", result);
+ 	// What happened?!
 	// Try again with different datatype
 	uint16_t result_16 = number + 23;
 	// Check the result with printf
-printf("%d\n", result_16);
+printf("uint16_t number are located between 0 and 65535. This value is = %d\n", result_16);
 	// What happened and why? 255 + 23 = 277
 
 	//----------------------------------------
 	int8_t number_negative = number;
 	// Check the result with printf
-    printf("%d\n", number_negative);
+    printf("int8_t number are located between -128 and 127. After that the counting starts again and the result = %d\n", number_negative);
 	// What happened and why? -128 + 126 = -2
     return 0;
 }
-
