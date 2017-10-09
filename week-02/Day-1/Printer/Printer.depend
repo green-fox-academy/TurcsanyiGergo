@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1507560009 source:c:\greenfox\turcsanyigergo\week-02\day-1\printer\main.c
+	<stdio.h>
+	<stdlib.h>
+	"printer.h"
+
+1507558833 c:\greenfox\turcsanyigergo\week-02\day-1\printer\printer.h
+
