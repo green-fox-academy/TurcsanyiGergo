@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "factorio.h"
 // create a function called `factorio`
 // that returns it's input's factorial with and without recursion
 // again the parameters value should be stored in a .h file
@@ -11,7 +11,7 @@ int main()
 {
 
 int fact = 0;
-    printf("Please give me a number for the calciulation:\n");
+    printf("Please give me a number for the calculation:\n");
     scanf("%d", &fact);
 
     printf("The result is: %d.", factorio(fact));
@@ -26,10 +26,8 @@ int factorio(fact){
     }
     int result = fact;
     for(int i = 1 ; i < fact; i++){
-        //for(int g = fact - 1; g >= 1; g--){
         result = result * i;
     }
-
 
     return result;
 }
