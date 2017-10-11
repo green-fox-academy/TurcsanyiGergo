@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1507735839 source:c:\greenfox\turcsanyigergo\week-02\day-1\more globallocal\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
