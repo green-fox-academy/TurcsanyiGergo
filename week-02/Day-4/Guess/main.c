@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int main() {
 
     srand(time(NULL));
-    int count , user_number = 0, random_number = rand() % 100;
+    int count, user_number = 0, random_number = rand() % 100;
 
 
     for (count = 0; count < 5; count++) {
@@ -17,14 +18,15 @@ int main() {
     }
 
         if(user_number > random_number)
-            printf("Too big!\n\n");
+            printf("Too big! You have %d lives left.\n\n", 4 - count);
         else
-            printf("Too small.\n\n");
+            printf("Too small. You have %d lives left.\n\n", 4 - count);
 
     }
 
     if(count == 5)
-        printf("No luck at this time, please try again!\n");
+        printf("No luck at this time, please try again! \nThe number was: %d. \n", random_number);
+
 
 
     return 0;
