@@ -16,10 +16,12 @@ int main() {
 int guess(){
 
     srand(time(NULL));
-    int count , user_number = 0, random_number = rand() % 100;
+    int counter = 0;
+    int user_number = 0;
+    int random_number = rand() % 101;
 
 
-    for (count = 0; count < 5; count++) {
+    for (counter = 0; counter < 5; counter++) {
         printf("Please enter your number: \n>");
         scanf("\n%d", &user_number);
 
@@ -28,16 +30,16 @@ int guess(){
             break;
     }
 
-        if(user_number > random_number)
-            printf("Too big! You have %d lives left.\n\n", 4-count);
-        else
-            printf("Too small. You have %d lives left.\n\n", 4 - count);
-
+        else if(user_number > random_number){
+            printf("Too big! You have %d lives left.\n\n", 4 - counter);
+        }
+        else  {
+            printf("Too small. You have %d lives left.\n\n", 4 - counter);
     }
-
-    if(count == 5)
+    }
+    if(counter == 5){
          printf("No luck at this time, please try again! \nThe number was: %d. \n", random_number);
-
+    }
 return 0;
 
 }

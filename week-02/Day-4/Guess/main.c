@@ -5,7 +5,7 @@
 int main() {
 
     srand(time(NULL));
-    int count, user_number = 0, random_number = rand() % 100;
+    int count, user_number = 0, random_number = rand() % 101;
 
 
     for (count = 0; count < 5; count++) {
