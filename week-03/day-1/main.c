@@ -1,8 +1,15 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdint.h>
+
+void printf_numbers(uint32_t from, uint32_t to)
+{
+
+	for (uint32_t i = from; i < to; i++)
+		printf("%u, ", i);
+}
 
 int main()
 {
-    printf("Hello world!\n");
-    return 0;
+	printf_numbers(2147483600, 2147484600);
+	return 0;
 }
