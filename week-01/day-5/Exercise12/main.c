@@ -19,35 +19,58 @@ take the conclusion:
 
 int main()
 {
-    int i;
-    for ( i = 1; i <= 7; i++){
-        if (i == 1)      {printf("%d Monday\n", i);}
-        else if (i == 2) {printf("%d Tuesday\n", i);}
-        else if (i == 3) {printf("%d Wednesday\n", i);}
-        else if (i == 4) {printf("%d Thursday\n", i);}
-        else if (i == 5) {printf("%d Friday\n", i);}
-        else if (i == 6) {printf("%d Saturday\n", i);}
-        else if (i == 7) {printf("%d Sunday\n\n\n", i);}
+
+    for (int i = 1; i <= 7; i++){
+
+        if (i == 1)      {
+                printf("%d Monday\n", i);
+        }
+        else if (i == 2) {
+                printf("%d Tuesday\n", i);
+        }
+        else if (i == 3) {
+                printf("%d Wednesday\n", i);
+        }
+        else if (i == 4) {
+                printf("%d Thursday\n", i);
+        }
+        else if (i == 5) {
+                printf("%d Friday\n", i);
+        }
+        else if (i == 6) {
+                printf("%d Saturday\n", i);
+        }
+        else if (i == 7) {
+                printf("%d Sunday\n\n\n", i);
+        }
 }
-        for (i = 1; i <= 7; i++ ){
+        for (int i = 1; i <= 7; i++){
 
         switch(i) {
-        case 1 : printf("%d Monday\n", i);
-            break;
-        case 2 : printf("%d Tuesday\n", i);
-            break;
-        case 3 : printf("%d Wednesday\n", i);
-            break;
-        case 4 : printf("%d Thursday\n", i);
-            break;
-        case 5 : printf("%d Friday\n", i);
-            break;
-        case 6 : printf("%d Saturday\n", i);
-            break;
-        case 7 : printf("%d Sunday\n\n\n", i);
-            break;
+            case 1 :
+                printf("%d Monday\n", i);
+                break;
+            case 2 :
+                printf("%d Tuesday\n", i);
+                break;
+            case 3 :
+                printf("%d Wednesday\n", i);
+                break;
+            case 4 :
+                printf("%d Thursday\n", i);
+                break;
+            case 5 :
+                printf("%d Friday\n", i);
+                break;
+            case 6 :
+                printf("%d Saturday\n", i);
+                break;
+            case 7 :
+                printf("%d Sunday\n\n\n", i);
+                break;
         }
         }
         printf("In my opinion to use switch is better.\n");
+
     return 0;
 }
