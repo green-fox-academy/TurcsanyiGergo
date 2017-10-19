@@ -4,76 +4,154 @@
 #include <math.h>
 #include <windows.h>
 
-void welcome_scr();
-void set_cursor_pos(int x, int y);
-COORD coord = {0,0};
+    void welcome_scr();
+    void set_cursor_pos(int x, int y);
+    COORD coord = {0,0};
+    const char plus[] = " + ";
+    const char minus[] = " - ";
+    const char star[] = " * ";
+    const char slash[] = " / ";
+    void sum();
+    void sub();
+    void multi();
+    void divi();
 
 int main()
 {
-    char command[256];
-    char* op_1, op_2;
+    char command[50];
+    char *op_1, *op_2;
     float input_1, input_2;
     float result;
     welcome_scr();
     set_cursor_pos(5, 5);
-    //printf("Gergo");
+
+
     while (strcmp(command, "exit") != 0) {
            gets (command);
-           if (strcmp(command, "clear") == 0) {
+            if (strcmp(command, "clear") == 0) {
                system("cls");
            }
             if (strcmp(command, "help") == 0){
                 welcome_scr();
             }
-            if (strstr(command, "+") == 0) {
-                op_1 = strtok(command, " ");
-                strtok(NULL, " ");
-                op_2 = strtok(NULL, " ");
-                input_1 = atof (op_1);
-                input_2 = atof (op_2);
-                result = input_1 + input_2;
-                printf("%.2f", result);
+            if (strstr(command, "+") != 0) {
+             sum(command);
+            }
+            if (strstr(command, "-") != 0){
+                sub(command);
+            }
+            if (strstr(command, "*") != 0){
+                sub(command);
+            }
+            if (strstr(command, "/") != 0){
+                sub(command);
             }
     }
-
 
     return 0;
 }
 
 
-void welcome_scr()
+    void welcome_scr()
 {
-    printf("\tGreg's CLI Calculator\n\n\n");
-    printf("====================================\n");
-    printf("usage: [number] [operation] [number]\n");
-    printf("Commands:\n");
-    printf("+\t summation\n");
-    printf("-\t subtraction\n");
-    printf("*\t multiplication\n");
-    printf("/\t division\n");
-    printf("\t division with remainder\n");
-    printf("^\t squaring\n");
-    printf("<\t square root\n");
-    printf("log\t logarithm\n");
-    printf("binto\t binary to hex or dec\n");
-    printf("hexto\t hexadecimal to bin or hex\n");
-    printf("decto\t decimal to bin or hex\n");
-    printf("====================================\n\n");
-    printf("exit\t exit from the program\n");
-    printf("clear\t clear the screen\n");
-    printf("help\t print usage\n");
-    printf("====================================\n\n");
-    printf("Press Enter to start!\n");
-    printf("====================================\n\n");
-    getchar();
-    system("cls");
+        printf("\tGreg's CLI Calculator\n\n\n");
+        printf("====================================\n");
+        printf("usage: [number] [operation] [number]\n");
+        printf("Commands:\n");
+        printf("+\t summation\n");
+        printf("-\t subtraction\n");
+        printf("*\t multiplication\n");
+        printf("/\t division\n");
+        printf("\t division with remainder\n");
+        printf("^\t squaring\n");
+        printf("<\t square root\n");
+        printf("log\t logarithm\n");
+        printf("binto\t binary to hex or dec\n");
+        printf("hexto\t hexadecimal to bin or hex\n");
+        printf("decto\t decimal to bin or hex\n");
+        printf("====================================\n\n");
+        printf("exit\t exit from the program\n");
+        printf("clear\t clear the screen\n");
+        printf("help\t print usage\n");
+        printf("====================================\n\n");
+        printf("Press Enter to start!\n");
+        printf("====================================\n\n");
+
+        getchar();
+        system("cls");
 }
 
 
-void set_cursor_pos(int x, int y)
+    void set_cursor_pos(int x, int y)
 {
 	coord.X = x;
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+    void sum(char(command[])){
+
+    //char command[50];
+    char *op_1, *op_2;
+    float input_1, input_2;
+    float result;
+
+    op_1 = strtok(command, plus);
+    op_2 = strtok(NULL, plus);
+
+    input_1 = atof (op_1);
+    input_2 = atof (op_2);
+
+    result = input_1 + input_2;
+
+        printf("The sum of these two numbers is: %.2f.", result);
+}
+
+    void sub(char(command[])){
+
+    //char command[50];
+    char *op_1, *op_2;
+    float input_1, input_2;
+    float result;
+
+    op_1 = strtok(command, minus);
+    op_2 = strtok(NULL, minus);
+
+    input_1 = atof (op_1);
+    input_2 = atof (op_2);
+
+    result = input_1 - input_2;
+
+    printf("The subtraction of these two numbers is: %.2f.", result);
+}
+
+    void multi(char(command[])) {
+    char *op_1, *op_2;
+    float input_1, input_2;
+    float result;
+
+    op_1 = strtok(command, star);
+    op_2 = strtok(NULL, star);
+
+    input_1 = atof (op_1);
+    input_2 = atof (op_2);
+
+    result = input_1 * input_2;
+
+        printf("The multiplication of these two numbers is: %.2f.", result);
+}
+    void divi(char(command[])) {
+    char *op_1, *op_2;
+    float input_1, input_2;
+    float result;
+
+    op_1 = strtok(command, slash);
+    op_2 = strtok(NULL, slash);
+
+    input_1 = atof (op_1);
+    input_2 = atof (op_2);
+
+    result = input_1 / input_2;
+
+    printf("The division of these two numbers is: %.2f.", result);
+}
