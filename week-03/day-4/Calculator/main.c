@@ -11,6 +11,9 @@ COORD coord = {0,0};
 int main()
 {
     char command[256];
+    char* op_1, op_2;
+    float input_1, input_2;
+    float result;
     welcome_scr();
     set_cursor_pos(5, 5);
     //printf("Gergo");
@@ -22,7 +25,16 @@ int main()
             if (strcmp(command, "help") == 0){
                 welcome_scr();
             }
-               }
+            if (strstr(command, "+") == 0) {
+                op_1 = strtok(command, " ");
+                strtok(NULL, " ");
+                op_2 = strtok(NULL, " ");
+                input_1 = atof (op_1);
+                input_2 = atof (op_2);
+                result = input_1 + input_2;
+                printf("%.2f", result);
+            }
+    }
 
 
     return 0;
