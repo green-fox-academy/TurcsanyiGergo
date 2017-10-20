@@ -35,16 +35,16 @@ int main()
                 welcome_scr();
             }
             if (strstr(command, "+") != 0) {
-             sum(command);
+                sum(command);
             }
             if (strstr(command, "-") != 0){
                 sub(command);
             }
             if (strstr(command, "*") != 0){
-                sub(command);
+                multi(command);
             }
             if (strstr(command, "/") != 0){
-                sub(command);
+                divi(command);
             }
     }
 
@@ -122,7 +122,7 @@ int main()
 
     result = input_1 - input_2;
 
-    printf("The subtraction of these two numbers is: %.2f.", result);
+        printf("The subtraction of these two numbers is: %.2f.", result);
 }
 
     void multi(char(command[])) {
@@ -132,7 +132,7 @@ int main()
 
     op_1 = strtok(command, star);
     op_2 = strtok(NULL, star);
-
+    //printf("op_1: %f, \t op_2: %f", op_1, op_2);
     input_1 = atof (op_1);
     input_2 = atof (op_2);
 
@@ -153,5 +153,5 @@ int main()
 
     result = input_1 / input_2;
 
-    printf("The division of these two numbers is: %.2f.", result);
+        printf("The division of these two numbers is: %.2f.", result);
 }
