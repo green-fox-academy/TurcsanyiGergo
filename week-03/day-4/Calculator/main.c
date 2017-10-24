@@ -30,7 +30,7 @@ int main()
            gets (command);
             if (strcmp(command, "clear") == 0) {
                system("cls");
-           }
+            }
             if (strcmp(command, "help") == 0){
                 welcome_scr();
             }
