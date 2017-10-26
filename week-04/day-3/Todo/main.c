@@ -2,6 +2,8 @@
 #include <stdlib.h>
 
 void welcome_scr();
+int task_number = 0;
+
 typedef struct {
 
 char duty [20];
@@ -10,13 +12,21 @@ int checked;
 
 } todo_t;
 
+void add_task(todo_t task_name, char *name);
+
 int main()
 {
-
+char command[255];
+todo_todos[100]
 welcome_scr();
 
-while (1{
-     gets("%s\t%[^\t\n");
+while (1) {
+    gets(command);
+    char *tok1 = strtok(command, " ");
+    char *tok2 = strtok(NULL, " ");
+    if(strcmp(tok1, "-a")){
+
+    }
 }
 
     return 0;
@@ -40,3 +50,7 @@ void welcome_scr() {
 
 }
 
+void add_task(todo_t task_name, char *name) {
+
+
+}
