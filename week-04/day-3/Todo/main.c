@@ -2,11 +2,22 @@
 #include <stdlib.h>
 
 void welcome_scr();
+typedef struct {
+
+char duty [20];
+int prio;
+int checked;
+
+} todo_t;
 
 int main()
 {
 
 welcome_scr();
+
+while (1{
+     gets("%s\t%[^\t\n");
+}
 
     return 0;
 }
@@ -28,3 +39,4 @@ void welcome_scr() {
  "-lp  Lists all the tasks by priority");
 
 }
+
