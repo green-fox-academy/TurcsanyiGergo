@@ -17,19 +17,22 @@ void add_task(todo_t task_name, char *name);
 int main()
 {
 char command[255];
-todo_todos[100]
+todo_t todos[100];
 welcome_scr();
 
 while (1) {
     gets(command);
     char *tok1 = strtok(command, " ");
     char *tok2 = strtok(NULL, " ");
-    if(strcmp(tok1, "-a")){
-
+    if(strcmp(tok1, "-a") ==0){
+    }
+    else if(strcmp(tok1, "-wr") ==0){
+}
+    else if(strcmp(tok1, "-rd") ==0){
     }
 }
-
     return 0;
+
 }
 
 void welcome_scr() {
@@ -46,7 +49,7 @@ void welcome_scr() {
  "-rm   Removes a task\n"
  "-c   Completes a task\n"
  "-p   Add priority to a task\n"
- "-lp  Lists all the tasks by priority");
+ "-lp  Lists all the tasks by priority\n");
 
 }
 
