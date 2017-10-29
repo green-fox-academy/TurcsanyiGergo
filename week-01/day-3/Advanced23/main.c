@@ -13,30 +13,6 @@ It should print: "Sausage party"
 if no girls are coming, regardless the count of the people
 Run your program at least 3-4 times, change the variables to see the different outputs
 */
-/*int main()
-{
-
-int girls_number = 0;
-int boys_number = 12;
-int sum = girls_number + boys_number;
-
-if (girls_number == boys_number && sum > 20) {
-    printf("The party is excellent!\n");
-
-
-else if(sum > 20 && boys_number != girls_number) {ú
-    printf("Quite cool party!\n");
-
- else if (sum < 20)
-    printf("Average party!\n");
-
- else (girls_number == 0) {
-    printf("Sausage party!\n");
- }
-
-    return 0;
-}
-*/
 
 int main()
 {
