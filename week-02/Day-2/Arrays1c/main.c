@@ -4,7 +4,7 @@ int main() {
     char my_name_array[] = "My Name is Gergo";
 
 
-    for(int i = 0; i <= 15; i++) {
+    for(int i = 0; i < sizeof (my_name_array); i++) {
         printf("%c \n", my_name_array[i]);
     }
 
