@@ -3,22 +3,17 @@
 int main() {
     char char_array[] = {'a', 'b', 'c', 'd'};
     char char_array_the_same[] = "abcd";
-
-	//TODO:
+    //TODO:
     // Print out the two arrays character-by-character
 
 	//TODO:
     // What is the difference between the arrays?
-    for(int i = 0; i <= 3; i++) {
-        printf("%c \n", char_array[i]);
+    for (int i = 0; i < sizeof (char_array); i++){
+        printf("%c\n", char_array[i]);
     }
-        printf("\nSize of this array is defined by character by character is %d.\n", sizeof(char_array));
-        printf("\n");
-
-    for(int g = 0; g <= 3; g++) {
-        printf("%c \n", char_array_the_same[g]);
+    for (int i = 0; i < sizeof (char_array_the_same); i++){
+        printf("%c\n", char_array_the_same[i]);
     }
-    printf("\nSize of this array is defined by string is %d.\n", sizeof(char_array_the_same));
 
     return 0;
 }
