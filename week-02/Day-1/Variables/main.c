@@ -18,13 +18,11 @@ void extra();
 
 int main() {
 
-
     add();
     sub();
     multi();
     doubling();
     extra();
-
     printf("\nYou have done %d operations.\n", counter);
 
 return 0;
