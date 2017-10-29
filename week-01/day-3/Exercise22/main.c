@@ -12,7 +12,7 @@ int main() {
 	// if time is more than 200
 	// set out to 0b010
 	// otherwise set out to 0b001
-	if ((ac%4 == 0) && (time < 200)) {
+	if ((ac % 4 == 0) && (time < 200)) {
         out = 0b100;
 	}
 	else if (time > 200){
@@ -21,7 +21,7 @@ int main() {
 	else {
         out = 0b001;
 	}
-	printf("%d", out);
+	printf("The out is: %d.\n", out);
 
 	return 0;
 }
