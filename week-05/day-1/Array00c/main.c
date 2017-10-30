@@ -4,6 +4,7 @@ void main()
 {
     int Gergo_array[5];
     printf("The original order is:\n");
+
     for(int i = 0; i < 5; i++){
         Gergo_array[i] = rand() * 0.5;
 
