@@ -7,15 +7,15 @@ void main()
     int Gergo_array[5];
     int Gergo_array2[7];
 
-    printf("The original array is:\n");
+        printf("The original array is:\n");
 
     for (int i = 0; i < 5; i++){
         Gergo_array[i] = rand() / 10;
         printf("%d|", Gergo_array[i]);
     }
-    printf("\n");
+        printf("\n");
 
-    printf("\nThe modified array is:\n");
+        printf("\nThe modified array is:\n");
 
     for(int i = 0; i <= 6; i++){
         Gergo_array2[i+1] = Gergo_array[i];
