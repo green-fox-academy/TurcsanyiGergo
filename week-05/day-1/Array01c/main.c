@@ -16,6 +16,7 @@ void main()
     printf("\n");
 
     printf("\nThe modified array is:\n");
+
     for(int i = 0; i <= 6; i++){
         Gergo_array2[i+1] = Gergo_array[i];
         Gergo_array2[0] = 42;
