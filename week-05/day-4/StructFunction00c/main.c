@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int book_counter = 0;
 
 typedef struct {
@@ -33,7 +32,6 @@ typedef struct {
     int year_of_publication;
 
 } books;
-
 
 void change_title(books *book, int index, char *new_title);
 void change_author(books *book, int index, char *new_author);
@@ -62,6 +60,7 @@ int main()
     printf("\nThe original year this book was: %d.\n", book[2].year_of_publication);
     change_year_of_pub(book, 2, 1945);
     printf("The new year of this book is: %d.\n", book[2].year_of_publication);
+
     return 0;
 }
 
@@ -70,12 +69,12 @@ void change_title(books *book, int index, char *new_title)
     strcpy(book[index].title, new_title);
 }
 
-void change_author(books *book, int index, char *new_author) {
-
+void change_author(books *book, int index, char *new_author)
+{
     strcpy(book[index].author, new_author);
 }
 
-void change_year_of_pub(books *book, int index, int new_year) {
-
+void change_year_of_pub(books *book, int index, int new_year)
+{
     book[index].year_of_publication = new_year;
 }
