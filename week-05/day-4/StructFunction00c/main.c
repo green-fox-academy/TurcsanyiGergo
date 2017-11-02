@@ -21,9 +21,6 @@
  * IMPORTANT: You should only print from the main function. All other functions should return the info needed.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-
 int book_counter = 0;
 
 typedef struct {
@@ -40,10 +37,10 @@ void change_year_of_pub(books *book, int index, int new_pub);
 
 int main()
 {
-    books b1 = {"Stuff", "Gibsz Jakab", 1999};
-    books b2 = {"other stuff", "John Doe", 2002};
-    books b3 = {"get things done", "Poe", 1919};
-    books b4 = {"this is fun", "You did this", 1979};
+    books b1 = {"Homers Odyssey", "Gwen Cooper", 2009};
+    books b2 = {"The clocks", "Agatha Christie", 1963};
+    books b3 = {"Cinder", "Marissa Meyer", 2012};
+    books b4 = {"Room", "Emma Donoghue", 2010};
 
     books book[] = {b1, b2, b3, b4};
 
