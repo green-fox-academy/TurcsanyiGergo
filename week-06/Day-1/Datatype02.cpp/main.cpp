@@ -14,11 +14,19 @@ int main()
 string name = "Gergely Turcsanyi";
 int age = 34;
 double height = 1.82;
+bool married = 0;
+string marriage = "";
+
+    if (married)
+        marriage = "married.";
+    else
+        marriage = "not married.";
 
 
 cout << name << endl;
 cout << age << endl;
 cout << height << endl;
+cout << "I am " << marriage << endl;
 
     return 0;
 }
