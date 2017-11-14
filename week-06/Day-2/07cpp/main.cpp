@@ -6,17 +6,19 @@ using namespace std;
 class Pirate{
     private:
 
-        int drinks;
-        string a = "Arrrr!";
-        string b = "Nothin'";
+    int drinks;
+    string a = "Arrrr!";
+    string b = "Nothin'";
 
     public:
         Pirate (int drinks) {
-            this->drinks = drinks;
+        this->drinks = drinks;
         }
-
-        int drink_rum(){
-            return drinks;
+    ~Pirate() {
+    cout << endl << "This program is finished." << endl;
+    }
+    int drink_rum(){
+        return drinks;
         }
 
         string hows_going_mate() {
@@ -42,5 +44,5 @@ int main() {
     // hows_going_mate should return "Arrrr!"
     // "Nothin'" otherwise
 
-  return 0;
+    return 0;
 }
