@@ -17,6 +17,7 @@ class Student {
         //Student() {
        // }
 int add_grade() {
+
             size_v = 5;
 
             for (unsigned int i = 0; i < size_v; ++i)
@@ -27,4 +28,27 @@ int add_grade() {
 
             return 0;
         }
+
+float get_average(){
+            float sum;
+            float avg;
+
+            for (int i = 0; i < size_v; ++i){
+                sum += (float)myVector[i];
+            }
+            avg = sum / (float)size_v;
+
+            return avg;
+        }
+};
+
+int main() {
+
+    // Create a student Class
+    // that has a method `add_grade`, that takes a grade from 1 to 5
+    // an other method `get_average`, that returns the average of the
+    // grades
+
+  return 0;
+}
 
