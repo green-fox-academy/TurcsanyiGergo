@@ -16,6 +16,9 @@ class Student {
     public:
         //Student() {
        // }
+        ~Student() {
+    cout << endl << "This program is finished." << endl;
+    }
 int add_grade() {
 
             size_v = 5;
