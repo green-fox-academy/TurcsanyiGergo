@@ -7,6 +7,9 @@ class Student {
   public:
     string name;
     unsigned int age;
+    ~Student() {
+    cout << endl << "This program is finished." << endl;
+    }
 };
 
 int main() {
