@@ -30,7 +30,7 @@ private:
 public:
     void set_radius (float r) {
     this -> radius = r;
-    }
+    calc_area();    }
 
     float get_radius() {
         return radius;
@@ -55,10 +55,12 @@ public:
 
     void set_len(float len) {
     this -> len = len;
+    calc_area();
     }
 
     void set_base (float base) {
     this -> base = base;
+    calc_area();
     }
 
     float get_len() {
@@ -82,7 +84,7 @@ public:
 int main()
 {
 
-Circle c = Circle (5);
+Circle c = Circle (0);
 
 c.set_radius(6);
 
@@ -90,8 +92,8 @@ cout << "The area of this circle is: " << c.get_area() << "." << endl;
 
 Triangle t = Triangle (5, 7.5);
 
-c.set_base(7);
-c.set_len(7.8);
+t.set_base(7);
+t.set_len(7.8);
 
 cout << "The area of this triangle is: " << t.get_area() << "." << endl;
 
