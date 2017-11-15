@@ -6,7 +6,7 @@
 
 using namespace std;
 
-//create an integer vector with the size of 5 and print the 3rd element of it
+	//create an integer vector with the size of 5 and print all elements of it
 
 int main() {
     vector <int> int_vect;
@@ -19,8 +19,6 @@ int main() {
     for (unsigned int i = 0; i < 5; i++) {
         cout << int_vect[i] << endl;
     }
-    cout <<"\nThe third element of this vector is: ";
-    cout << int_vect[2] << "." << endl;
 
     return 0;
 }
