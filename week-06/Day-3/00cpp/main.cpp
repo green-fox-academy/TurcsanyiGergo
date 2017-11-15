@@ -13,6 +13,10 @@ class Human{
     public:
         virtual void traveling(){
             cout << "Human can walk." << endl << endl;
+        }
+        ~Human() {
+      cout << "See you next time!" << endl;
+      }
 };
 
 class SuperHuman: public Human {
@@ -20,6 +24,7 @@ class SuperHuman: public Human {
     public:
         void traveling(){
             cout << "Superhuman is able to fly." << endl << endl;
+        }
 
 };
 
@@ -27,8 +32,8 @@ class AquaMan: public Human {
 
     public:
         void traveling(){
-            cout << "AquaHuman can riding with dolphins." << endl;
-        };
+            cout << "AquaHuman can riding with dolphins.\n" << endl;
+        }
 };
 
 int main()
