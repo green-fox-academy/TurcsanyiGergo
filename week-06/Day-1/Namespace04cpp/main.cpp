@@ -32,7 +32,6 @@ int sum_ages();
 
 int main()
 {
-
     cout << "The sum of " << Mark::name << " and " << Maria::name << " ages is: " << sum_ages() << "." << endl;
 
     return 0;
