@@ -28,7 +28,5 @@ int main() {
     delete age;
     delete slice_of_pizza_you_can_eat;
 
-
-
     return 0;
 }
