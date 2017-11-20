@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 /* Write a function which is called "get_fibonacci_number". It returns the "N"th
@@ -15,27 +16,58 @@ using namespace std;
  *  Negative numbers are invalid parameters.
  *  It should throw an exception
  */
-void get_fibonacci_number (int N)
 
-int main() {
+int get_fibonacci_number(int n);
 
+int main()
+{
+    try {
+    cout << get_fibonacci_number(9) << endl;;
+    }
+    catch (int x) {
+        cout << "You cannot use negative numbers here!" << endl;
+    }
 
-	return 0;
+    return 0;
 }
 
-void get_fibonacci_number (int N)
+int get_fibonacci_number(int n)
 {
-    int result = 0;
+    if (n < 0)
+    {
+        throw -1;
+    }
+    else
+    {
+        if (n == 0)
+        {
+            return 0;
+        }
+        else if (n == 1)
+        {
+            return 1;
+        }
+        else if (n == 2)
+        {
+            return 1;
+        }
+        else
+        {
+            int a = 0;
+            int b = 1;
+            int c = 0;
+            int counter = 0;
 
-    if (N < 0) {
-        printf("Error, this table only works with positive numbers.\n");
-    } else {
-        printf("The first %d positive even number is:\n", N);
-
-        for (int i = 0; i < N * 2; i++) {
-            if (i % 2 == 0) {
-                printf("%d ", i);
+            while (counter != n - 1)
+            {
+                a = b;
+                b = c;
+                c = a + b;
+                counter++;
             }
+
+        return c;
         }
     }
+
 }
