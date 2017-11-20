@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 // Write a try - catch block.
@@ -7,18 +8,18 @@ using namespace std;
 
 int main() {
 
-try{
+    try{
 
     int num1 = 4;
     int num2 = 0;
 
     if (num2 == 0)
-        throw "F";
+        throw 'F';
 
     cout << num1/num2 << endl;
     }
-    catch (char const* Y) {
-    cout << "You cannot divide by " << Y << "." << endl;
+    catch (char y)  {
+    cout << "You cannot divide by 0, ERROR: "<< y << endl;
     }
 
 	return 0;
