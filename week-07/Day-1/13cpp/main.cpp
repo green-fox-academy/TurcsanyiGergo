@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <stdexcept>
 
 using namespace std;
 
@@ -11,12 +12,22 @@ using namespace std;
 
 int main()
 {
+    try{
     clock_t endwait;
-    endwait =  10000;
+    endwait = 10000;
     cout << "Please enter the input: ";
 
     while (clock() < endwait) {
 
+    }
+    cout << endl;
+
+    if (endwait >= 10000) {
+        throw runtime_error("Failed, it took you too much time, loser!");
+    }
+    }
+    catch (runtime_error &err) {
+        cout << err.what() << endl;
     }
 
    return 0;
