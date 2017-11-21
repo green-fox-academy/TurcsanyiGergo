@@ -8,12 +8,12 @@ using namespace std;
 // For input use 1 and 2, then 1, 2 and 3.
 
 int sum (int a, int b);
-float sum (float a, float b, float c);
+int sum (int a, int b, int c);
 
 int main() {
 
     cout << sum(1, 2) << endl;
-    cout << sum(1.0, 2.0, 3.0) << endl;
+    cout << sum(1, 2, 3) << endl;
 
 	return 0;
 }
@@ -22,10 +22,9 @@ int sum (int a, int b) {
 
 
     return a + b;
-
 }
 
-float sum (float a, float b, float c) {
+int sum (int a, int b, int c) {
 
     return a + b + c;
 }
