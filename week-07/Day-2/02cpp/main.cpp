@@ -14,7 +14,9 @@ string stringFunction(string a, string b, string c, string d);
 
 int main() {
 
-    cout <<
+    cout << stringFunction("Hello", " Gergo") << endl;
+    cout << stringFunction("Hello", " Gergo", " how ") << endl;
+    cout << stringFunction("Hello", " Gergo", " how ", "you") << endl;
 
 	return 0;
 }
