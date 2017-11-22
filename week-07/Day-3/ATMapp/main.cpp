@@ -5,11 +5,14 @@ using namespace std;
 
 class ATM {
 private:
-    unsigned int AdminPassword = 87654321;
+    string AdminPassword = "admin123";
 public:
-    bool ValidGetATMPassword(unsigned int inputPass) {
-    return (inputPass == AdminPassword ? 1 : 0);
-        }
+    string getATMAdminPass() {
+    return AdminPassword;
+    }
+    //bool ValidGetATMPassword(unsigned int inputPass) {
+    //return (inputPass == AdminPassword ? 1 : 0);
+      //  }
 };
 
 class UserData {
@@ -35,6 +38,15 @@ public:
     void addUser(UserData id) {
     UserList.push_back(id);
     }
+
+    unsigned int GetUserPin(unsigned int index) {
+    return UserList.at(index).PinCode;
+    }
+
+    unsigned int GetUserCount() {
+    return UserList.size;
+    }
+
     void PrintRichest() {
     float max_money = 0;
     unsigned int max_index = 0;
@@ -46,7 +58,6 @@ public:
         }
         cout << "The richest person is: " << UserList.at(max_index).GetName() << ".";
     }
-
 
 };
 
@@ -90,9 +101,28 @@ void WelcomeScreen() {
     cout << "Please enter you PIN!" << endl;
     cin >> input_pin;
 
-    if (BantATM.validGetATMPassword(input_pin) == 1) {
+    if  {
 
         cout << ""
     }
 
+}
+
+int ValidateInput(string input_pass) {
+    if (input_pass == BankATM.getATMAdminPass()) {
+        return 9999;
+    }
+    else
+    return -1;
+}
+
+int ValidateInput(unsigned int input_pass) {
+    for(int i = 0; i < BankUsers.GetUserCount(); i++) {
+
+    }
+        if (input_pass == BankUsers.GetUserPin(i)) {
+        return i;
+    }
+    else
+    return -1;
 }
