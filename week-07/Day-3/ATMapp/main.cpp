@@ -66,7 +66,7 @@ int main() {
     BankUsers.addUser (u4);
     BankUsers.addUser (u5);
 
-
+    BankUsers.PrintRichest();
 
     return 0;
 }
