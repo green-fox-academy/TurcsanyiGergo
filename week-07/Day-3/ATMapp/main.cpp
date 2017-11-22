@@ -3,6 +3,15 @@
 
 using namespace std;
 
+class ATM {
+private:
+    unsigned int AdminPassword = 87654321;
+public:
+    bool ValidGetATMPassword(unsigned int inputPass) {
+    return (inputPass == AdminPassword ? 1 : 0);
+        }
+};
+
 class UserData {
 private:
     string name;
@@ -66,7 +75,24 @@ int main() {
     BankUsers.addUser (u4);
     BankUsers.addUser (u5);
 
+    ATM BankATM;
+
     BankUsers.PrintRichest();
 
     return 0;
+}
+
+void WelcomeScreen() {
+    unsigned int input_pin = 0;
+
+    cout << "Welcome to GregiBank Machine" << endl;
+    cout << "****************************" << endl;
+    cout << "Please enter you PIN!" << endl;
+    cin >> input_pin;
+
+    if (BantATM.validGetATMPassword(input_pin) == 1) {
+
+        cout << ""
+    }
+
 }
