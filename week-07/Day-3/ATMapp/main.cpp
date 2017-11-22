@@ -75,7 +75,9 @@ public:
 
 };
 
-void WelcomeScreen();
+unsigned int WelcomeScreen();
+unsigned int UserMenu();
+unsigned int AdminMenu();
 
 int main() {
 
@@ -92,22 +94,53 @@ int main() {
     BankUsers.addUser (u4);
     BankUsers.addUser (u5);
 
-    BankUsers.PrintRichest();
+    //BankUsers.PrintRichest();
 
-    WelcomeScreen();
-    int input_pin;
-    cin >> input_pin;
-    BankUsers.ValidateInput(input_pin);
+    //WelcomeScreen();
+
+    //BankUsers.ValidateInput(input_pin);
+
+    unsigned int input;
+    while (input = WelcomeScreen(), input != 0) {
+    switch (BankUsers.ValidateInput(input))  {
+        case 9999: AdminMenu();
+        break;
+        default : UserMenu();
+    }
+    }
+    cout << "***************************" << endl;
+    cout << "Goodbye!" << endl;
 
     return 0;
 }
 
-void WelcomeScreen() {
+unsigned int  WelcomeScreen() {
 
+    int input_pin;
 
     cout <<  "Welcome to GregiBank Machine" << endl;
     cout << "****************************" << endl;
-    cout << "Please enter you PIN!" << endl;
+    cout << "Please enter you PIN or [0] to exit!" << endl;
+    cin >> input_pin;
+
+    return input_pin;
 
 }
 
+unsigned int UserMenu() {
+
+    unsigned int money;
+    cout << "Enter the amount you would like to withdraw: ";
+    cin >> money;
+
+    return money;
+}
+
+unsigned int AdminMenu() {
+
+    unsigned int money;
+    cout << "Please enter the amount you put in the machine!";
+    cin >> money;
+
+    return money;
+}
