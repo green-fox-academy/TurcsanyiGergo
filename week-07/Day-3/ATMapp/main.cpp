@@ -3,17 +3,6 @@
 
 using namespace std;
 
-class ATM {
-private:
-    string AdminPassword = "admin123";
-public:
-    string getATMAdminPass() {
-    return AdminPassword;
-    }
-    //bool ValidGetATMPassword(unsigned int inputPass) {
-    //return (inputPass == AdminPassword ? 1 : 0);
-      //  }
-};
 
 class UserData {
 private:
@@ -36,9 +25,14 @@ public:
 class Users {
 private:
     vector<UserData> UserList;
+    string AdminPassword = "admin123";
 public:
     void addUser(UserData id) {
     UserList.push_back(id);
+    }
+
+    string getATMAdminPass() {
+    return AdminPassword;
     }
 
     unsigned int GetUserPin(unsigned int index) {
@@ -48,6 +42,26 @@ public:
     unsigned int GetUserCount() {
     return UserList.size();
     }
+    int ValidateInput(string input_pass) {
+        if (input_pass == AdminPassword) {
+                cout << "Admin logged in." << endl;
+            return 9999;
+        }
+        cout << "Login failed, try again!" << endl;
+            return -1;
+    }
+
+    int ValidateInput(unsigned int input_pass) {
+        for(int i = 0; i < UserList.size(); i++) {
+
+        if (input_pass == UserList.at(i).GetPinCode()) {
+            cout  << UserList.at(i).GetName() << " logged in." << endl;
+            return i;
+        }
+        }
+        cout << "Login failed, try again!" << endl;
+            return -1;
+}
 
     void PrintRichest() {
     float max_money = 0;
@@ -58,17 +72,8 @@ public:
             max_index = i;
             }
         }
-        cout << "The richest person is: " << UserList.at(max_index).GetName() << ".";
+        //cout << "The richest person is: " << UserList.at(max_index).GetName() << ".";
     }
-
-};
-
-class Customer : public Users {
-
-
-};
-
-class Administrator : public Users {
 
 };
 
@@ -91,38 +96,22 @@ int main() {
     BankUsers.addUser (u4);
     BankUsers.addUser (u5);
 
-    ATM BankATM;
-
     BankUsers.PrintRichest();
 
     WelcomeScreen();
+    string input_pin;
+    cin >> input_pin;
+    BankUsers.ValidateInput(input_pin);
+
     return 0;
 }
 
 void WelcomeScreen() {
-    unsigned int input_pin = 0;
 
-    cout << "Welcome to GregiBank Machine" << endl;
+
+    cout <<  "Welcome to GregiBank Machine" << endl;
     cout << "****************************" << endl;
     cout << "Please enter you PIN!" << endl;
-    cin >> input_pin;
+
 }
 
-int ValidateInput(string input_pass) {
-    if (input_pass == BankATM.getATMAdminPass()) {
-        return 9999;
-    }
-    else
-    return -1;
-}
-
-int ValidateInput(unsigned int input_pass) {
-    for(int i = 0; i < BankUsers.GetUserCount(); i++) {
-
-    }
-        if (input_pass == BankUsers.GetUserPin(i)) {
-        return i;
-    }
-    else
-    return -1;
-}
