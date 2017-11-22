@@ -25,13 +25,13 @@ public:
 class Users {
 private:
     vector<UserData> UserList;
-    string AdminPassword = "admin123";
+    int AdminPassword = 87654321;
 public:
     void addUser(UserData id) {
     UserList.push_back(id);
     }
 
-    string getATMAdminPass() {
+    int getATMAdminPass() {
     return AdminPassword;
     }
 
@@ -42,22 +42,20 @@ public:
     unsigned int GetUserCount() {
     return UserList.size();
     }
-    int ValidateInput(string input_pass) {
-        if (input_pass == AdminPassword) {
-                cout << "Admin logged in." << endl;
-            return 9999;
-        }
-        cout << "Login failed, try again!" << endl;
-            return -1;
-    }
 
     int ValidateInput(unsigned int input_pass) {
         for(int i = 0; i < UserList.size(); i++) {
 
-        if (input_pass == UserList.at(i).GetPinCode()) {
+            if (input_pass == UserList.at(i).GetPinCode()) {
             cout  << UserList.at(i).GetName() << " logged in." << endl;
             return i;
         }
+
+        }
+        if (input_pass == AdminPassword) {
+
+            cout << "Admin logged in!" << endl;
+            return 9999;
         }
         cout << "Login failed, try again!" << endl;
             return -1;
@@ -77,8 +75,6 @@ public:
 
 };
 
-int ValidateInput(string input_pass);
-int ValidateInput(unsigned int input_pass);
 void WelcomeScreen();
 
 int main() {
@@ -99,7 +95,7 @@ int main() {
     BankUsers.PrintRichest();
 
     WelcomeScreen();
-    string input_pin;
+    int input_pin;
     cin >> input_pin;
     BankUsers.ValidateInput(input_pin);
 
