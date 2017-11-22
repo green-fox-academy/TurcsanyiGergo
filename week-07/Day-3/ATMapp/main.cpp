@@ -4,19 +4,22 @@
 using namespace std;
 
 class UserData {
-public:
+private:
     string name;
     unsigned int PinCode;
     unsigned int AdminPinCode;
     int money;
+public:
+    UserData (string name, unsigned int PinCode, unsigned int AdminPinCode, int money) : name(name), PinCode(PinCode), AdminPinCode(AdminPinCode), money(money){}
+
 
 };
 
 class Users {
 private:
     vector<UserData> UserList;
-    void addUser(string name, unsigned int PinCode, unsigned int AdminPinCode, int money) {
-    UserDataTemp;
+    void addUser(UserData id) {
+    UserList.push_back(id);
 
 
     }
