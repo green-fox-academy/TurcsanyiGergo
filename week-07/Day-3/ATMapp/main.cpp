@@ -28,7 +28,9 @@ public:
     string GetName() {
     return name;
     }
-
+    unsigned int GetPinCode() {
+    return PinCode;
+    }
 };
 
 class Users {
@@ -40,11 +42,11 @@ public:
     }
 
     unsigned int GetUserPin(unsigned int index) {
-    return UserList.at(index).PinCode;
+    return UserList.at(index).GetPinCode();
     }
 
     unsigned int GetUserCount() {
-    return UserList.size;
+    return UserList.size();
     }
 
     void PrintRichest() {
@@ -70,6 +72,9 @@ class Administrator : public Users {
 
 };
 
+int ValidateInput(string input_pass);
+int ValidateInput(unsigned int input_pass);
+void WelcomeScreen();
 
 int main() {
 
@@ -90,6 +95,7 @@ int main() {
 
     BankUsers.PrintRichest();
 
+    WelcomeScreen();
     return 0;
 }
 
@@ -100,12 +106,6 @@ void WelcomeScreen() {
     cout << "****************************" << endl;
     cout << "Please enter you PIN!" << endl;
     cin >> input_pin;
-
-    if  {
-
-        cout << ""
-    }
-
 }
 
 int ValidateInput(string input_pass) {
