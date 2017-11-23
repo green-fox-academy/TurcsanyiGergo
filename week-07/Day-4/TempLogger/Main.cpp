@@ -4,13 +4,18 @@
 #include <windows.h>
 #include "SerialPortWrapper.h"
 #include <conio.h>
+#include "data.h"
 
 using namespace std;
 
 void WelcomeScreen();
+Data data_checker(string line);
 
 int main()
 {
+    Data temp;
+    vector<Data>data_vector;
+
     string input;
     WelcomeScreen();
     vector<string> ports = SerialPortWrapper::listAvailablePorts();
@@ -86,5 +91,17 @@ cout << "s        Start logging / Stop logging" << endl;;
 cout << "c        Close port" << endl;
 cout << "l        List after error handling" << endl;
 cout << "e        Exit from the program" << endl << endl;
+
+}
+
+Data data_checker(string line) {
+    Data data;
+    return data;
+
+    size_t pos = user_input.find('.');
+
+    data.year =user_input.substr(0, pos);
+
+
 
 }
