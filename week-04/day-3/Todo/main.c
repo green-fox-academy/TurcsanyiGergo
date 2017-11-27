@@ -24,11 +24,24 @@ while (1) {
     gets(command);
     char *tok1 = strtok(command, " ");
     char *tok2 = strtok(NULL, " ");
+
     if(strcmp(tok1, "-a") ==0){
     }
     else if(strcmp(tok1, "-wr") ==0){
 }
     else if(strcmp(tok1, "-rd") ==0){
+    }
+    else if(strcmp(tok1, "-l") ==0){
+    }
+    else if(strcmp(tok1, "-e") ==0){
+    }
+    else if(strcmp(tok1, "-rm") ==0){
+    }
+    else if(strcmp(tok1, "-c") ==0){
+    }
+    else if(strcmp(tok1, "-p") ==0){
+    }
+    else (strcmp(tok1, "-lp") ==0){
     }
 }
     return 0;

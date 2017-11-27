@@ -97,10 +97,14 @@ cout << "e        Exit from the program" << endl << endl;
 Data data_checker(string line) {
     Data data;
     return data;
+    string string_temp;
+    int int_temp;
+
 
     size_t pos = user_input.find('.');
 
     data.year =user_input.substr(0, pos);
+    int_temp = stoi (string_temp, NULL, 10);
 
 
 

@@ -1,4 +1,4 @@
- #include <iostream>
+#include <iostream>
 #include <vector>
 #define Pi 3.14
 
@@ -9,9 +9,10 @@ using namespace std;
 // which should get the area and the price of the paint as parameters
 // It should return the costs of the painting
 
-class Shape {
+class Shape {  // In C there is no "Class", only Struct
+                // Difference (Class could contain functions)
 
-public:
+public:         //In C everything is public and there inheritance
     float get_area () {
         return area;
     }
@@ -19,33 +20,34 @@ public:
     return area * paint_price;
     }
 void set_paint_price (float pp) {
-    this -> paint_price = pp;
+    this -> paint_price = pp;           //The "this" is a pointer what points to object
 }
 
-protected:
+protected:                      // Protected class: Only the child classes are able too see the protected members
     float area;
-    virtual float calc_area () = 0;
+    virtual float calc_area () = 0;     // Virtual : define a function in a class and you want it to be inheritanced, you can override it.
     float paint_price;
 };
 
-class Circle :public Shape {
+class Circle :public Shape {  //Here you can see that the new "Circle" class what inheritates the feautures of the parent/base Class (Shape)
 
-private:
+private:                       // THis is private because only the "Circle" is able to see this variable
     float radius;
 
 public:
-    void set_radius (float r) {
-    this -> radius = r;
+    void set_radius (float r) {     // Set-get method : THe variables are private, so we need public functions to set and get the value of these variables. This could be a security feature, it's not possible to modify the original value from outside
+    radius = r;
     calc_area();
     }
 
-    float get_radius() {
+    float get_radius() {            //get method
         return radius;
     }
-    Circle(float r) {
+    Circle(float r, float price) {               // "Constructor" = initializer function for setting initial values for certain member variables.
     set_radius(r);
+    set_paint_price(price);
     }
-    ~Circle () {
+    ~Circle () {                    // It runs when the program is finished or the object is deleted
     cout << "\nThis section is finished." << endl;
     }
 private:
@@ -84,7 +86,7 @@ public:
     set_base(b);
     set_len(l);
     }
-private:
+
     float calc_area() {
     area = (base * len) / 2;
     return area;
@@ -94,10 +96,10 @@ private:
 int main()
 {
 
-    Circle c = Circle (0);
+    Circle c = Circle (6, 500);  // Create an object named "c", what's type is "Circle", in the bracket the number is the parameter of the constrtuctor
 
-    c.set_radius(6);
-    c.set_paint_price(500);
+    //c.set_radius(6);
+    //c.set_paint_price(500);
 
     cout << "The area of this circle is: " << c.get_area() << "." << endl;
 
