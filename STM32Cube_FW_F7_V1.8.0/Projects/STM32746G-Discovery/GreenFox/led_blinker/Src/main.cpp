@@ -97,6 +97,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+
 	  //TODO:
 	  //Flash the led with 200 ms period time
 	  BSP_LED_On(LED_GREEN); // LED is ON
