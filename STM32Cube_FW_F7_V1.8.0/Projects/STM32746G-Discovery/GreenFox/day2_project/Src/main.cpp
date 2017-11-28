@@ -65,6 +65,7 @@ static void CPU_CACHE_Enable(void);
   */
 int main(void)
 {
+
   /* This project template calls firstly two functions in order to configure MPU feature 
      and to enable the CPU Cache, respectively MPU_Config() and CPU_CACHE_Enable().
      These functions are provided as template implementation that User may integrate 
@@ -76,6 +77,9 @@ int main(void)
 
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
+  HAL_Init();
+
+  SystemClock_Config();
 
   /* STM32F7xx HAL library initialization:
        - Configure the Flash ART accelerator on ITCM interface
@@ -83,38 +87,63 @@ int main(void)
        - Set NVIC Group Priority to 4
        - Low Level Initialization
      */
-  HAL_Init();
+  __HAL_RCC_GPIOA_CLK_ENABLE();    // we need to enable the GPIOA port's clock first
 
-  /* Configure the System clock to have a frequency of 216 MHz */
-  SystemClock_Config();
+  GPIO_InitTypeDef tda;            // create a config structure
+  tda.Pin = GPIO_PIN_0;            // this is about PIN 0
+  tda.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+  tda.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+  tda.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
-  //TODO:
-  //Initialization the push button and the led with using BSP
-  BSP_LED_Init(LED_GREEN);
-  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-  //Turn the led on to validate the initialization is occured.
-  BSP_LED_On(LED_GREEN);
-  /* Add your application code here     */
-  /* Infinite loop */
-  while (1)
-  {
-	  //TODO:
-	  //Write a simple program witch flashes(toggle) the led when the button is pressed
-	  if (BSP_PB_GetState(BUTTON_KEY) == SET) {
-		  BSP_LED_Toggle(LED_GREEN);
-		  HAL_Delay(200);
+  HAL_GPIO_Init(GPIOA, &tda);      // initialize the pin on GPIOA port with HAL;
 
-	  }
 
-	  else if (BSP_PB_GetState(BUTTON_KEY) == RESET) {
+  __HAL_RCC_GPIOF_CLK_ENABLE();
 
-		  BSP_LED_Toggle(LED_GREEN);
-		  HAL_Delay(1000);
+	GPIO_InitTypeDef tda1;            // create a config structure
+	tda1.Pin = GPIO_PIN_10;            // this is about PIN 1
+	tda1.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+	tda1.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+	tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
-	  }
-  }
+	HAL_GPIO_Init(GPIOF, &tda1);      // initialize the pin on GPIOA port with HAL;
+
+	GPIO_InitTypeDef tda2;            // create a config structure
+	tda2.Pin = GPIO_PIN_9;            // this is about PIN 1
+	tda2.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+	tda2.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+	tda2.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+	HAL_GPIO_Init(GPIOF, &tda2);      // initialize the pin on GPIOA port with HAL;
+
+	GPIO_InitTypeDef tda3;            // create a config structure
+	tda3.Pin = GPIO_PIN_8;            // this is about PIN 1
+	tda3.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+	tda3.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+	tda3.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+	HAL_GPIO_Init(GPIOF, &tda3);      // initialize the pin on GPIOA port with HAL;
+
+   while(1)
+   { /* Configure the System clock to have a frequency of 216 MHz */
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);   // setting the pin to 1
+    HAL_Delay(25);                                      // wait a second
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET); // setting the pin to 0
+    HAL_Delay(15);
+    HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);   // setting the pin to 1
+	HAL_Delay(25);                                      // wait a second
+	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET); // setting the pin to 0
+	HAL_Delay(15);
+	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);   // setting the pin to 1
+	HAL_Delay(25);                                      // wait a second
+	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET); // setting the pin to 0
+	HAL_Delay(15);
+	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_SET);   // setting the pin to 1
+	HAL_Delay(25);                                      // wait a second
+	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_RESET); // setting the pin to 0
+	HAL_Delay(1501);
+   }
 }
-
 
 /**
   * @brief  System Clock Configuration
@@ -136,6 +165,7 @@ int main(void)
   * @param  None
   * @retval None
   */
+
 static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
