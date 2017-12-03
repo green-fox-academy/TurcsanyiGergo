@@ -69,6 +69,7 @@ void led_on (uint8_t pin) {
 	case 0:
 		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);
 		break;
+
 	case 1:
 		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
 		break;
@@ -89,6 +90,7 @@ void led_off (uint8_t pin) {
 		case 0:
 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET);
 			break;
+
 		case 1:
 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET);
 			break;
@@ -127,6 +129,16 @@ int main(void)
        - Set NVIC Group Priority to 4
        - Low Level Initialization
      */
+  __HAL_RCC_GPIOA_CLK_ENABLE();    // we need to enable the GPIOA port's clock first
+
+  GPIO_InitTypeDef tda;            // create a config structure
+  tda.Pin = GPIO_PIN_0;            // this is about PIN 0
+  tda.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+  tda.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+  tda.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+  HAL_GPIO_Init(GPIOA, &tda);      // initialize the pin on GPIOA port with HAL;
+
 
   __HAL_RCC_GPIOF_CLK_ENABLE();
 
@@ -140,14 +152,24 @@ int main(void)
 
 
 		led_off(0);
-		led_off(1);
-		led_off(2);
-		led_off(3);
-		led_off(4);
-
+			 led_off(1);
+			 led_off(2);
+			 led_off(3);
+			 led_off(4);
    while(1)
    { /* Configure the System clock to have a frequency of 216 MHz */
 
+
+    //HAL_GPIO_WritePin(GPIOF, 0b0000011111000000U, GPIO_PIN_SET);// setting the pin to 1
+   /* int i = 0;
+    int to_write;
+    for(i; i < 32; i++)  {
+    to_write = i << 6;
+    GPIOF->ODR |= to_write;
+    HAL_Delay(1200);
+    GPIOF->ODR &= 0;
+    //HAL_Delay(1200);
+    } */
 	   int num = 0;
 	   for(int i = 0; i < 32; i++) {
 		  num = i;
@@ -158,12 +180,12 @@ int main(void)
 				  num = num / 2;
 
 			  }
-	HAL_Delay(1000);
-	led_off(0);
-	led_off(1);
-	led_off(2);
-	led_off(3);
-	led_off(4);
+		  HAL_Delay(1300);
+		 led_off(0);
+		 led_off(1);
+		 led_off(2);
+		 led_off(3);
+		 led_off(4);
 
 		  }
 

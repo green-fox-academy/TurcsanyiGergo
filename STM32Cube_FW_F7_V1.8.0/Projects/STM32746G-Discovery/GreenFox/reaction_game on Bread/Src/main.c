@@ -105,59 +105,58 @@ int main(void) {
 	//BSP_LED_Init(LED_GREEN);
 	//BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 
-	__HAL_RCC_GPIOA_CLK_ENABLE()
-		;    // we need to enable the GPIOA port's clock first
+	__HAL_RCC_GPIOA_CLK_ENABLE();    // we need to enable the GPIOA port's clock first
 
-		GPIO_InitTypeDef tda;            // create a config structure
-		tda.Pin = GPIO_PIN_0;            // this is about PIN 0
-		tda.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
-		tda.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
-		tda.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+	GPIO_InitTypeDef tda;            // create a config structure
+	tda.Pin = GPIO_PIN_0;            // this is about PIN 0
+	tda.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
+	tda.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+	tda.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
-		HAL_GPIO_Init(GPIOA, &tda);    // initialize the pin on GPIOA port with HAL;
+	HAL_GPIO_Init(GPIOA, &tda);    // initialize the pin on GPIOA port with HAL;
 
-		__HAL_RCC_GPIOF_CLK_ENABLE()
-		;
+	__HAL_RCC_GPIOF_CLK_ENABLE()
+	;
 
-		GPIO_InitTypeDef tda1;            // create a config structure
-		tda1.Pin = GPIO_PIN_10;            // this is about PIN 1
-		tda1.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
-		tda1.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
-		tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+	GPIO_InitTypeDef tda1;            // create a config structure
+	tda1.Pin = GPIO_PIN_10;            // this is about PIN 1
+	tda1.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
+	tda1.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
+	tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
-		HAL_GPIO_Init(GPIOF, &tda1);   // initialize the pin on GPIOF port with HAL;
+	HAL_GPIO_Init(GPIOF, &tda1);   // initialize the pin on GPIOF port with HAL;
 
-		GPIO_InitTypeDef tda2;            // create a config structure
-		tda2.Pin = GPIO_PIN_9;            // this is about PIN 9
-		tda2.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
-		tda2.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
-		tda2.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+	GPIO_InitTypeDef tda2;            // create a config structure
+	tda2.Pin = GPIO_PIN_9;            // this is about PIN 9
+	tda2.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
+	tda2.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
+	tda2.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
-		HAL_GPIO_Init(GPIOF, &tda2);   // initialize the pin on GPIOA port with HAL;
+	HAL_GPIO_Init(GPIOF, &tda2);   // initialize the pin on GPIOA port with HAL;
 
-		GPIO_InitTypeDef tda3;            // create a config structure
-		tda3.Pin = GPIO_PIN_8;            // this is about PIN 8
-		tda3.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
-		tda3.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
-		tda3.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+	GPIO_InitTypeDef tda3;            // create a config structure
+	tda3.Pin = GPIO_PIN_8;            // this is about PIN 8
+	tda3.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
+	tda3.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
+	tda3.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
-		HAL_GPIO_Init(GPIOF, &tda3);   // initialize the pin on GPIOF port with HAL;
+	HAL_GPIO_Init(GPIOF, &tda3);   // initialize the pin on GPIOF port with HAL;
 
-		GPIO_InitTypeDef tda4;            // create a config structure
-		tda4.Pin = GPIO_PIN_7;            // this is about PIN 8
-		tda4.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
-		tda4.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
-		tda4.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+	GPIO_InitTypeDef tda4;            // create a config structure
+	tda4.Pin = GPIO_PIN_7;            // this is about PIN 8
+	tda4.Mode = GPIO_MODE_OUTPUT_PP; // Configure as output with push-up-down enabled
+	tda4.Pull = GPIO_PULLDOWN;       // the push-up-down should work as pulldown
+	tda4.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
-		HAL_GPIO_Init(GPIOF, &tda4);   // initialize the pin on GPIOF port with HAL;
+	HAL_GPIO_Init(GPIOF, &tda4);   // initialize the pin on GPIOF port with HAL;
 
-		GPIO_InitTypeDef button;
-		button.Pin = GPIO_PIN_6;
-		button.Mode = GPIO_MODE_INPUT;
-		button.Pull = GPIO_PULLUP;
-		button.Speed = GPIO_SPEED_HIGH;
+	GPIO_InitTypeDef button;
+	button.Pin = GPIO_PIN_6;
+	button.Mode = GPIO_MODE_INPUT;
+	button.Pull = GPIO_PULLUP;
+	button.Speed = GPIO_SPEED_HIGH;
 
-		HAL_GPIO_Init(GPIOF, &button);
+	HAL_GPIO_Init(GPIOF, &button);
 
 	uart_handle.Init.BaudRate = 115200;
 	uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
@@ -168,9 +167,8 @@ int main(void) {
 
 	BSP_COM_Init(COM1, &uart_handle);
 
-		rnd.Instance = RNG;
-		HAL_RNG_Init(&rnd);
-
+	rnd.Instance = RNG;
+	HAL_RNG_Init(&rnd);
 
 	//printf("%u", rnd_num);
 
@@ -183,186 +181,210 @@ int main(void) {
 	uint32_t tickstart = 0;
 
 	while (1) {
-		printf("Let's play a game! Are you ready?\n");
+
+		printf("Are you ready? Press the button to switch the flashing LEDs out and wait for the next one!\n");
 		while (flag == 1) {
-			if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6) == 0) {
-				GPIOA->ODR = 0b00001;
-				GPIOF->ODR = 0b11110000000;
-				HAL_Delay(300);
-				GPIOA->ODR = 0b00000;
-				GPIOF->ODR = 0b00000000000;
-				HAL_Delay(300);
-				if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6) == 1) {
+
+			if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6) == SET) {
+
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_7, GPIO_PIN_SET);   // setting the pin to 1
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);   // setting the pin to 1
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_SET);   // setting the pin to 1
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);   // setting the pin to 1
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);   // setting the pin to 1
+
+				HAL_Delay(500);
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_7, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET);
+				HAL_Delay(500);
+
+				if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6) == RESET) {
 					flag = 0;
 				}
 			}
 		}
+
 		int rndDelayMs = (HAL_RNG_GetRandomNumber(&rnd) % 10000) + 1;
 		HAL_Delay(rndDelayMs);
-		GPIOA->ODR = 0b00001;
-		GPIOF->ODR = 0b11110000000;
+
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_7, GPIO_PIN_SET);   // setting the pin to 1
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);   // setting the pin to 1
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_SET);   // setting the pin to 1
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);   // setting the pin to 1
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);   // setting the pin to 1
 
 		tickstart = HAL_GetTick();
-		while (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6) == 0) {
-		printf("Your reaction time: %d (milliseconds): .\n\n", (int)HAL_GetTick() - (int)tickstart);
-		//printf("The random time was: %u (milliseconds).\n", rndDelayMs);
-		GPIOA->ODR = 0b00000;
-		GPIOF->ODR = 0b00000000000;
+		while (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_6) == SET) {
+		}
+
+		printf("The random time was: %u (milliseconds).\n", rndDelayMs);
+		printf("Your reaction time: %d (milliseconds): .\n", (int) HAL_GetTick() - (int) tickstart);
+
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_7, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET);
+
 		flag = 1;
-	}
+		printf("Get Ready for next round! Press the button to switch the flashing LEDs out and wait for the next one! \n\n");
+		HAL_Delay(2000);
+
 	}
 }
-	/**
-	 * @brief  Retargets the C library printf function to the USART.
-	 * @param  None
-	 * @retval None
-	 */
-	PUTCHAR_PROTOTYPE {
-		/* Place your implementation of fputc here */
-		/* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
-		HAL_UART_Transmit(&uart_handle, (uint8_t *) &ch, 1, 0xFFFF);
+/**
+ * @brief  Retargets the C library printf function to the USART.
+ * @param  None
+ * @retval None
+ */
+PUTCHAR_PROTOTYPE {
+	/* Place your implementation of fputc here */
+	/* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
+	HAL_UART_Transmit(&uart_handle, (uint8_t *) &ch, 1, 0xFFFF);
 
-		return ch;
+	return ch;
+}
+
+/**
+ * @brief  System Clock Configuration
+ *         The system Clock is configured as follow :
+ *            System Clock source            = PLL (HSE)
+ *            SYSCLK(Hz)                     = 216000000
+ *            HCLK(Hz)                       = 216000000
+ *            AHB Prescaler                  = 1
+ *            APB1 Prescaler                 = 4
+ *            APB2 Prescaler                 = 2
+ *            HSE Frequency(Hz)              = 25000000
+ *            PLL_M                          = 25
+ *            PLL_N                          = 432
+ *            PLL_P                          = 2
+ *            PLL_Q                          = 9
+ *            VDD(V)                         = 3.3
+ *            Main regulator output voltage  = Scale1 mode
+ *            Flash Latency(WS)              = 7
+ * @param  None
+ * @retval None
+ */
+static void SystemClock_Config(void) {
+	RCC_ClkInitTypeDef RCC_ClkInitStruct;
+	RCC_OscInitTypeDef RCC_OscInitStruct;
+
+	/* Enable HSE Oscillator and activate PLL with HSE as source */
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+	RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+	RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+	RCC_OscInitStruct.PLL.PLLM = 25;
+	RCC_OscInitStruct.PLL.PLLN = 432;
+	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+	RCC_OscInitStruct.PLL.PLLQ = 9;
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+		Error_Handler();
 	}
 
-	/**
-	 * @brief  System Clock Configuration
-	 *         The system Clock is configured as follow :
-	 *            System Clock source            = PLL (HSE)
-	 *            SYSCLK(Hz)                     = 216000000
-	 *            HCLK(Hz)                       = 216000000
-	 *            AHB Prescaler                  = 1
-	 *            APB1 Prescaler                 = 4
-	 *            APB2 Prescaler                 = 2
-	 *            HSE Frequency(Hz)              = 25000000
-	 *            PLL_M                          = 25
-	 *            PLL_N                          = 432
-	 *            PLL_P                          = 2
-	 *            PLL_Q                          = 9
-	 *            VDD(V)                         = 3.3
-	 *            Main regulator output voltage  = Scale1 mode
-	 *            Flash Latency(WS)              = 7
-	 * @param  None
-	 * @retval None
-	 */
-	static void SystemClock_Config(void) {
-		RCC_ClkInitTypeDef RCC_ClkInitStruct;
-		RCC_OscInitTypeDef RCC_OscInitStruct;
-
-		/* Enable HSE Oscillator and activate PLL with HSE as source */
-		RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-		RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-		RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
-		RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-		RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-		RCC_OscInitStruct.PLL.PLLM = 25;
-		RCC_OscInitStruct.PLL.PLLN = 432;
-		RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-		RCC_OscInitStruct.PLL.PLLQ = 9;
-		if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-			Error_Handler();
-		}
-
-		/* activate the OverDrive to reach the 216 Mhz Frequency */
-		if (HAL_PWREx_EnableOverDrive() != HAL_OK) {
-			Error_Handler();
-		}
-
-		/* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
-		 clocks dividers */
-		RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK
-				| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
-		RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-		RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-		RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-		RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-		if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7)
-				!= HAL_OK) {
-			Error_Handler();
-		}
+	/* activate the OverDrive to reach the 216 Mhz Frequency */
+	if (HAL_PWREx_EnableOverDrive() != HAL_OK) {
+		Error_Handler();
 	}
 
-	/**
-	 * @brief  This function is executed in case of error occurrence.
-	 * @param  None
-	 * @retval None
-	 */
-	static void Error_Handler(void) {
-		/* User may add here some code to deal with this error */
-		while (1) {
-		}
+	/* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+	 clocks dividers */
+	RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK
+			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK) {
+		Error_Handler();
 	}
+}
 
-	/**
-	 * @brief  Configure the MPU attributes as Write Through for SRAM1/2.
-	 * @note   The Base Address is 0x20010000 since this memory interface is the AXI.
-	 *         The Region Size is 256KB, it is related to SRAM1 and SRAM2  memory size.
-	 * @param  None
-	 * @retval None
-	 */
-	static void MPU_Config(void) {
-		MPU_Region_InitTypeDef MPU_InitStruct;
-
-		/* Disable the MPU */
-		HAL_MPU_Disable();
-
-		/* Configure the MPU attributes as WT for SRAM */
-		MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-		MPU_InitStruct.BaseAddress = 0x20010000;
-		MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
-		MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
-		MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
-		MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
-		MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
-		MPU_InitStruct.Number = MPU_REGION_NUMBER0;
-		MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
-		MPU_InitStruct.SubRegionDisable = 0x00;
-		MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
-
-		HAL_MPU_ConfigRegion(&MPU_InitStruct);
-
-		/* Enable the MPU */
-		HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+/**
+ * @brief  This function is executed in case of error occurrence.
+ * @param  None
+ * @retval None
+ */
+static void Error_Handler(void) {
+	/* User may add here some code to deal with this error */
+	while (1) {
 	}
+}
 
-	/**
-	 * @brief  CPU L1-Cache enable.
-	 * @param  None
-	 * @retval None
-	 */
-	static void CPU_CACHE_Enable(void) {
-		/* Enable I-Cache */
-		SCB_EnableICache();
+/**
+ * @brief  Configure the MPU attributes as Write Through for SRAM1/2.
+ * @note   The Base Address is 0x20010000 since this memory interface is the AXI.
+ *         The Region Size is 256KB, it is related to SRAM1 and SRAM2  memory size.
+ * @param  None
+ * @retval None
+ */
+static void MPU_Config(void) {
+	MPU_Region_InitTypeDef MPU_InitStruct;
 
-		/* Enable D-Cache */
-		SCB_EnableDCache();
-	}
+	/* Disable the MPU */
+	HAL_MPU_Disable();
+
+	/* Configure the MPU attributes as WT for SRAM */
+	MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+	MPU_InitStruct.BaseAddress = 0x20010000;
+	MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
+	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+	MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+	MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+	MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+	MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+	MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+	MPU_InitStruct.SubRegionDisable = 0x00;
+	MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+	/* Enable the MPU */
+	HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+}
+
+/**
+ * @brief  CPU L1-Cache enable.
+ * @param  None
+ * @retval None
+ */
+static void CPU_CACHE_Enable(void) {
+	/* Enable I-Cache */
+	SCB_EnableICache();
+
+	/* Enable D-Cache */
+	SCB_EnableDCache();
+}
 
 #ifdef  USE_FULL_ASSERT
 
-	/**
-	 * @brief  Reports the name of the source file and the source line number
-	 *         where the assert_param error has occurred.
-	 * @param  file: pointer to the source file name
-	 * @param  line: assert_param error line source number
-	 * @retval None
-	 */
-	void assert_failed(uint8_t* file, uint32_t line)
-	{
-		/* User can add his own implementation to report the file name and line number,
-		 ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+/**
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
+void assert_failed(uint8_t* file, uint32_t line)
+{
+	/* User can add his own implementation to report the file name and line number,
+	 ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
-		/* Infinite loop */
-		while (1)
-		{
-		}
+	/* Infinite loop */
+	while (1)
+	{
 	}
+}
 #endif
 
-	/**
-	 * @}
-	 */
+/**
+ * @}
+ */
 
-	/**
-	 * @}
-	 */
+/**
+ * @}
+ */
