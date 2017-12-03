@@ -148,6 +148,24 @@ int main(void)
    while(1)
    { /* Configure the System clock to have a frequency of 216 MHz */
 
+
+
+	   //HAL_GPIO_WritePin(GPIOF, 0b0000011111000000U, GPIO_PIN_SET);// setting the pin to 1
+	     /* int i = 0;
+	      int to_write;
+	      for(i; i < 32; i++)  {
+	      to_write = i << 6;
+	      GPIOF->ODR |= to_write;
+	      HAL_Delay(1200);
+	      GPIOF->ODR &= 0;
+	      //HAL_Delay(1200);
+	      } */
+
+
+
+
+
+
 	   int num = 0;
 	   for(int i = 0; i < 32; i++) {
 		  num = i;
