@@ -104,8 +104,8 @@ int main(void) {
 	/* Configure the System clock to have a frequency of 216 MHz */
 	SystemClock_Config();
 
-	BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
-
+	//BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
+	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 	/* Add your application code here
 	 */
 	BSP_LED_Init(LED_GREEN);
@@ -125,7 +125,12 @@ int main(void) {
 
 
 	while (1) {
+		if (BSP_PB_GetState(BUTTON_KEY) == SET) {
+
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+		} else {
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+		}
 
 	}
 }
