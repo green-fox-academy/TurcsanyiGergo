@@ -78,12 +78,15 @@ static void CPU_CACHE_Enable(void);
  * @retval None
  */
 TIM_HandleTypeDef TimHandle;
-TIM_OC_InitTypeDef sConfig;
+//TIM_OC_InitTypeDef sConfig;
 
 void LEDInit();
 //void Button_IT_init();
 //void EXTI15_10_IRQHandler();
 void TimerInit();
+void TIM1_UP_TIM10_IRQHandler();
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+
 
 int main(void) {
 	/* This project template calls firstly two functions in order to configure MPU feature
@@ -142,7 +145,7 @@ void LEDInit() {
 
 		GPIO_InitTypeDef tda1;            // create a config structure
 		tda1.Pin = GPIO_PIN_8;            // this is about PIN 1
-		tda1.Mode = GPIO_MODE_AF_PP;  // Configure as output with push-up-down enabled
+		tda1.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
 		tda1.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
 		tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
@@ -155,24 +158,35 @@ void TimerInit() {
 	__HAL_RCC_TIM1_CLK_ENABLE();
 
 		TimHandle.Instance               = TIM1;
-		TimHandle.Init.Period            = 4000; //Max = 100%
+		TimHandle.Init.Period            = 2000; //Max = 100%
 		TimHandle.Init.Prescaler         = 54000; //Using full speed 216MHz
 		TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 		TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
 		//_HAL_TIM_ENABLE_IT(&TimHandle, TIM_IT_CC1);
-		//HAL_TIM_Base_Init(&TimHandle);
+		HAL_TIM_Base_Init(&TimHandle);
 		//HAL_TIM_Base_Start(&TimHandle);
+		HAL_TIM_Base_Start_IT(&TimHandle);
 
-		sConfig.OCMode = TIM_OCMODE_PWM1;
-		sConfig.Pulse = 2000;
 
-		HAL_TIM_PWM_Init(&TimHandle);
-		HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
-		HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_1);
+		//sConfig.OCMode = TIM_OCMODE_PWM1;
+		//sConfig.Pulse = 2000;
+
+		//HAL_TIM_PWM_Init(&TimHandle);
+		//HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
+		//HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_1);
+
+		HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0x0F, 0x00);
+		HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 }
 
+void TIM1_UP_TIM10_IRQHandler() {
+	HAL_TIM_IRQHandler(&TimHandle);
+}
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_8);
+}
 /*void Button_IT_init() {
 
 	__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
