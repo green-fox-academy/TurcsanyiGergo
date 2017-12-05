@@ -77,10 +77,13 @@ static void CPU_CACHE_Enable(void);
  * @param  None
  * @retval None
  */
+TIM_HandleTypeDef TimHandle;
+TIM_OC_InitTypeDef sConfig;
 
 void LEDInit();
-void Button_IT_init();
-void EXTI15_10_IRQHandler();
+//void Button_IT_init();
+//void EXTI15_10_IRQHandler();
+void TimerInit();
 
 int main(void) {
 	/* This project template calls firstly two functions in order to configure MPU feature
@@ -125,6 +128,7 @@ int main(void) {
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
+	TimerInit();
 
 	while (1) {
 
@@ -138,7 +142,7 @@ void LEDInit() {
 
 		GPIO_InitTypeDef tda1;            // create a config structure
 		tda1.Pin = GPIO_PIN_8;            // this is about PIN 1
-		tda1.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+		tda1.Mode = GPIO_MODE_AF_PP;  // Configure as output with push-up-down enabled
 		tda1.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
 		tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
@@ -146,8 +150,7 @@ void LEDInit() {
 }
 
 void TimerInit() {
-	TIM_HandleTypeDef TimHandle;
-	TIM_OC_InitTypeDef sConfig;
+
 
 	__HAL_RCC_TIM1_CLK_ENABLE();
 
@@ -157,12 +160,12 @@ void TimerInit() {
 		TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 		TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
-		_HAL_TIM_ENABLE_IT(&TimHandle, TIM_IT_CC1);
+		//_HAL_TIM_ENABLE_IT(&TimHandle, TIM_IT_CC1);
 		//HAL_TIM_Base_Init(&TimHandle);
 		//HAL_TIM_Base_Start(&TimHandle);
 
 		sConfig.OCMode = TIM_OCMODE_PWM1;
-		//sConfig.Pulse	= 0;
+		sConfig.Pulse = 2000;
 
 		HAL_TIM_PWM_Init(&TimHandle);
 		HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
@@ -170,26 +173,23 @@ void TimerInit() {
 }
 
 
-void Button_IT_init() {
+/*void Button_IT_init() {
 
 	__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
 
 	GPIO_InitTypeDef conf;                // create the configuration struct
 	conf.Pin = GPIO_PIN_11;               // the pin is the 11
 
-	/* We know from the board's datasheet that a resistor is already installed externally for this button (so it's not floating), we don't want to use the internal pull feature */
+
 	conf.Pull = GPIO_NOPULL;
 	conf.Speed = GPIO_SPEED_FAST;         // port speed to fast
 
-	/* Here is the trick: our mode is interrupt on rising edge */
 	conf.Mode = GPIO_MODE_IT_RISING;
 
 	HAL_GPIO_Init(GPIOI, &conf);          // call the HAL init
 
-	/* assign the lowest priority to our interrupt line */
 	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
 
-	/* tell the interrupt handling unit to process our interrupts */
 	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
 
@@ -204,7 +204,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
 	}
 }
-
+*/
 /**
  * @brief  Retargets the C library printf function to the USART.
  * @param  None
