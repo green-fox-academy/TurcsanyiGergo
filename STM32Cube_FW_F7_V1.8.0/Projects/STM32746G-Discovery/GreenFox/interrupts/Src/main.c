@@ -79,6 +79,8 @@ static void CPU_CACHE_Enable(void);
  */
 
 void LEDInit();
+void Button_IT_init();
+void EXTI15_10_IRQHandler();
 
 int main(void) {
 	/* This project template calls firstly two functions in order to configure MPU feature
@@ -104,8 +106,8 @@ int main(void) {
 	/* Configure the System clock to have a frequency of 216 MHz */
 	SystemClock_Config();
 
-	//BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
-	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+	BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
+	//BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 	/* Add your application code here
 	 */
 	BSP_LED_Init(LED_GREEN);
@@ -125,12 +127,7 @@ int main(void) {
 
 
 	while (1) {
-		if (BSP_PB_GetState(BUTTON_KEY) == SET) {
 
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
-		} else {
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
-		}
 
 	}
 }
@@ -146,8 +143,42 @@ void LEDInit() {
 		tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
 
 		HAL_GPIO_Init(GPIOA, &tda1);      // initialize the pin on GPIOA port with HAL;
-
 }
+void Button_IT_init() {
+
+	__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
+
+	GPIO_InitTypeDef conf;                // create the configuration struct
+	conf.Pin = GPIO_PIN_11;               // the pin is the 11
+
+	/* We know from the board's datasheet that a resistor is already installed externally for this button (so it's not floating), we don't want to use the internal pull feature */
+	conf.Pull = GPIO_NOPULL;
+	conf.Speed = GPIO_SPEED_FAST;         // port speed to fast
+
+	/* Here is the trick: our mode is interrupt on rising edge */
+	conf.Mode = GPIO_MODE_IT_RISING;
+
+	HAL_GPIO_Init(GPIOI, &conf);          // call the HAL init
+
+	/* assign the lowest priority to our interrupt line */
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
+
+	/* tell the interrupt handling unit to process our interrupts */
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+}
+
+void EXTI15_10_IRQHandler() {
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8) == SET) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
+	} else {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+	}
+}
+
 /**
  * @brief  Retargets the C library printf function to the USART.
  * @param  None
