@@ -77,6 +77,9 @@ static void CPU_CACHE_Enable(void);
  * @param  None
  * @retval None
  */
+
+void LEDInit();
+
 int main(void) {
 	/* This project template calls firstly two functions in order to configure MPU feature
 	 and to enable the CPU Cache, respectively MPU_Config() and CPU_CACHE_Enable().
@@ -115,16 +118,31 @@ int main(void) {
 	uart_handle.Init.Mode = UART_MODE_TX_RX;
 
 	BSP_COM_Init(COM1, &uart_handle);
-
+	LEDInit();
 
 	printf("\n-----------------WELCOME-----------------\r\n");
 	printf("**********in STATIC interrupts WS**********\r\n\n");
 
 
 	while (1) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+
 	}
 }
 
+void LEDInit() {
+
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+
+		GPIO_InitTypeDef tda1;            // create a config structure
+		tda1.Pin = GPIO_PIN_8;            // this is about PIN 1
+		tda1.Mode = GPIO_MODE_OUTPUT_PP;  // Configure as output with push-up-down enabled
+		tda1.Pull = GPIO_PULLDOWN;        // the push-up-down should work as pulldown
+		tda1.Speed = GPIO_SPEED_HIGH;     // we need a high-speed output
+
+		HAL_GPIO_Init(GPIOA, &tda1);      // initialize the pin on GPIOA port with HAL;
+
+}
 /**
  * @brief  Retargets the C library printf function to the USART.
  * @param  None
