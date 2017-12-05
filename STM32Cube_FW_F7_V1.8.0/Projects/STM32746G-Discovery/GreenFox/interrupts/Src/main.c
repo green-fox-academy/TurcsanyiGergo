@@ -144,6 +144,32 @@ void LEDInit() {
 
 		HAL_GPIO_Init(GPIOA, &tda1);      // initialize the pin on GPIOA port with HAL;
 }
+
+void TimerInit() {
+	TIM_HandleTypeDef TimHandle;
+	TIM_OC_InitTypeDef sConfig;
+
+	__HAL_RCC_TIM1_CLK_ENABLE();
+
+		TimHandle.Instance               = TIM1;
+		TimHandle.Init.Period            = 4000; //Max = 100%
+		TimHandle.Init.Prescaler         = 54000; //Using full speed 216MHz
+		TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+		TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+
+		_HAL_TIM_ENABLE_IT(&TimHandle, TIM_IT_CC1);
+		//HAL_TIM_Base_Init(&TimHandle);
+		//HAL_TIM_Base_Start(&TimHandle);
+
+		sConfig.OCMode = TIM_OCMODE_PWM1;
+		//sConfig.Pulse	= 0;
+
+		HAL_TIM_PWM_Init(&TimHandle);
+		HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
+		HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_1);
+}
+
+
 void Button_IT_init() {
 
 	__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
