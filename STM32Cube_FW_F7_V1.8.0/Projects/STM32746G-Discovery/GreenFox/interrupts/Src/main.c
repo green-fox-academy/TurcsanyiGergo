@@ -187,7 +187,7 @@ void TIM1_UP_TIM10_IRQHandler() {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_8);
 }
-/*void Button_IT_init() {
+void Button_IT_init() {
 
 	__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
 
