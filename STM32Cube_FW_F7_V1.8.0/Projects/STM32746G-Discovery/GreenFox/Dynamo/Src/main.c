@@ -78,6 +78,7 @@ static void CPU_CACHE_Enable(void);
  * @retval None
  */
 TIM_HandleTypeDef TimHandle;
+TIM_HandleTypeDef TimHandle2;
 TIM_OC_InitTypeDef sConfig;
 GPIO_InitTypeDef tda1;
 
@@ -87,7 +88,10 @@ void Button_IT_init();
 void EXTI15_10_IRQHandler();
 void TimerInit();
 //void TIM1_UP_TIM10_IRQHandler();
-//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+void TimerIT();
+
+void TIM2_IRQHandler();
 
 
 int main(void) {
@@ -137,6 +141,8 @@ int main(void) {
 
 	TimerInit();
 
+TimerIT();
+
 	while (1) {
 
 
@@ -159,12 +165,11 @@ void LEDInit() {
 
 void TimerInit() {
 
-
 	__HAL_RCC_TIM1_CLK_ENABLE();
 
 		TimHandle.Instance               = TIM1;
 		TimHandle.Init.Period            = 1000; //Max = 100%
-		TimHandle.Init.Prescaler         = 0; //Using full speed 216MHz
+		TimHandle.Init.Prescaler         = 1; //Using full speed 216MHz
 		TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 		TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
@@ -175,7 +180,7 @@ void TimerInit() {
 
 
 		sConfig.OCMode = TIM_OCMODE_PWM1;
-		sConfig.Pulse = 0;
+		sConfig.Pulse =  0;
 
 		HAL_TIM_PWM_Init(&TimHandle);
 		HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
@@ -185,19 +190,37 @@ void TimerInit() {
 		//HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 }
 
-/*void TIM1_UP_TIM10_IRQHandler() {
-	HAL_TIM_IRQHandler(&TimHandle);
+
+void TimerIT() {
+
+	__HAL_RCC_TIM2_CLK_ENABLE();
+
+		TimHandle2.Instance               = TIM2;
+		TimHandle2.Init.Period            = 40; //Max = 100%
+		TimHandle2.Init.Prescaler         = 54000; //Using full speed 216MHz
+		TimHandle2.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+		TimHandle2.Init.CounterMode       = TIM_COUNTERMODE_UP;
+
+		HAL_TIM_Base_Init(&TimHandle2);
+		HAL_TIM_Base_Start_IT(&TimHandle2);
+
+		HAL_NVIC_SetPriority(TIM2_IRQn, 0x1F, 0x00);
+		HAL_NVIC_EnableIRQ(TIM2_IRQn);
+}
+void TIM2_IRQHandler() {
+	HAL_TIM_IRQHandler(&TimHandle2);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_8);
-}*/
+	if (TIM1 -> CCR1 > 0) {
+		TIM1 -> CCR1 -= 1;
+		}
+}
 
 void Button_IT_init() {
 
-	//__HAL_RCC_GPIOI_CLK_ENABLE();         // enable the GPIOI clock
+	//__HAL_RCC_GPIOI_CLK_ENABLE();
 
-	                // create the configuration struct
 	conf.Pin = GPIO_PIN_15;               // the pin is the 15
 
 
@@ -218,14 +241,10 @@ void EXTI15_10_IRQHandler() {
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	/*if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8) == SET) {
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
-	} else {
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
-	}*/
-	TIM1->CCR1+= 50;
+	if (TIM1 -> CCR1 <= 980) {
+		TIM1 -> CCR1 += 20;
+	}
 }
-
 /**
  * @brief  Retargets the C library printf function to the USART.
  * @param  None
