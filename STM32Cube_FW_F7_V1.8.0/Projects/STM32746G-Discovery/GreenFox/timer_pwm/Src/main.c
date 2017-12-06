@@ -111,12 +111,28 @@ int main(void)
   	TimHandle.Init.Prescaler         = 1;
   	TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
   	TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  	TimHandle.Init.RepetitionCounter = 1;
 
   	HAL_TIM_Base_Init(&TimHandle);            //Configure the timer
 
   	HAL_TIM_Base_Start(&TimHandle);
+  	__HAL_RCC_TIM1_CLK_ENABLE();              // enable TIM1 clock
 
-  BSP_LED_Init(LED_GREEN);
+  	__HAL_RCC_GPIOA_CLK_ENABLE();             //Enable GPIOA clock
+
+  	GPIO_InitTypeDef ledConfig;  //set upthe pin, push-pull, no pullup..etc
+
+  	ledConfig.Mode =
+  	ledConfig.Alternate = GPIO_AF1_TIM1;      // and the alternate function is to use TIM1 timer's first channel
+
+  	gpio_init_structure.Pin = GPIO_PIN[Led];
+  	gpio_init_structure.Mode = GPIO_MODE_OUTPUT_PP;
+ 	gpio_init_structure.Pull = GPIO_PULLUP;
+  	gpio_init_structure.Speed = GPIO_SPEED_HIGH;
+
+  	HAL_GPIO_Init(GPIOA, &ledConfig);
+
+ // BSP_LED_Init(LED_GREEN);
 
   uart_handle.Init.BaudRate   = 115200;
   uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
