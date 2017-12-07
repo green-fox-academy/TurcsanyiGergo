@@ -130,11 +130,12 @@ int main(void) {
 
 	BSP_COM_Init(COM1, &uart_handle);
 	FANInit();
+	TimerInit();
 
 	printf("\n-----------------WELCOME-----------------\r\n");
-	printf("**********in STATIC interrupts WS**********\r\n\n");
+	printf("**********in Greg's Fan Control**********\r\n\n");
+	printf("Idling at: %lu%%\n", (unsigned)TIM2->CCR1 / 10);
 
-	TimerInit();
 
 	//TimerIT();
 
@@ -169,7 +170,7 @@ void TimerInit() {
 		TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
 		sConfig.OCMode = TIM_OCMODE_PWM1;
-		sConfig.Pulse =  120;
+		sConfig.Pulse =  250;
 
 		HAL_TIM_PWM_Init(&TimHandle);
 		HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
@@ -233,11 +234,11 @@ void EXTI15_10_IRQHandler() {
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == GPIO_PIN_14) {
 		TIM2->CCR1 >= 10 ? (TIM2->CCR1 -= 10) : (TIM2->CCR1 = 0);
-		printf("Slowing down! Status: %lu%\n", (unsigned)TIM2->CCR1 / 1000);
+		printf("Slowing down! Status: %lu%%\n", (unsigned)TIM2->CCR1 / 10);
 		//HAL_Delay(50);
 	} else if (GPIO_Pin == GPIO_PIN_15) {
 		TIM2->CCR1 <= 990 ? (TIM2->CCR1 += 10) : (TIM2->CCR1 = 1000);
-		printf("Up! Status: %lu%\n", (unsigned)TIM2->CCR1 / 1000);
+		printf("Speeding up! Status: %lu%%\n", (unsigned)TIM2->CCR1 / 10);
 		//HAL_Delay(50);
 	}
 }
