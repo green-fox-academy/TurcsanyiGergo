@@ -84,13 +84,14 @@ GPIO_InitTypeDef tda1;
 
 GPIO_InitTypeDef conf;
 void FANInit();
-void Button_IT_init();
+void Button_FAN_init();
 void EXTI15_10_IRQHandler();
 void TimerInit();
 //void TIM1_UP_TIM10_IRQHandler();
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void TimerIT();
-
+GPIO_InitTypeDef ButtonUP;
+GPIO_InitTypeDef ButtonDOWN;
 void TIM2_IRQHandler();
 
 
@@ -118,13 +119,7 @@ int main(void) {
 	/* Configure the System clock to have a frequency of 216 MHz */
 	SystemClock_Config();
 
-	//BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
-	//BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-	/* Add your application code here
-	 */
-	//BSP_LED_Init(LED_GREEN);
-
-	//Button_IT_init();
+	Button_FAN_init();
 
 	uart_handle.Init.BaudRate = 115200;
 	uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
@@ -173,12 +168,6 @@ void TimerInit() {
 		TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 		TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
-		//_HAL_TIM_ENABLE_IT(&TimHandle, TIM_IT_CC1);
-		//HAL_TIM_Base_Init(&TimHandle);
-		//HAL_TIM_Base_Start(&TimHandle);
-		//HAL_TIM_Base_Start_IT(&TimHandle);
-
-
 		sConfig.OCMode = TIM_OCMODE_PWM1;
 		sConfig.Pulse =  120;
 
@@ -188,7 +177,7 @@ void TimerInit() {
 }
 
 
-void TimerIT() {
+/*void TimerIT() {
 
 	__HAL_RCC_TIM2_CLK_ENABLE();
 
@@ -213,33 +202,43 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		TIM1 -> CCR1 -= 1;
 		}
 }
+*/
+void Button_FAN_init() {
 
-void Button_IT_init() {
+	__HAL_RCC_GPIOB_CLK_ENABLE();
 
-	//__HAL_RCC_GPIOI_CLK_ENABLE();
+	ButtonDOWN.Pin = GPIO_PIN_14;               // the pin is the 14
+	ButtonDOWN.Pull = GPIO_PULLUP;
+	ButtonDOWN.Speed = GPIO_SPEED_FAST;         // port speed to fast
+	ButtonDOWN.Mode = GPIO_MODE_IT_RISING;
 
-	conf.Pin = GPIO_PIN_15;               // the pin is the 15
+	HAL_GPIO_Init(GPIOB, &ButtonDOWN);
 
+	ButtonUP.Pin = GPIO_PIN_15;               // the pin is the 15
+	ButtonUP.Pull = GPIO_PULLUP;
+	ButtonUP.Speed = GPIO_SPEED_FAST;         // port speed to fast
+	ButtonUP.Mode = GPIO_MODE_IT_RISING;
 
-	conf.Pull = GPIO_NOPULL;
-	conf.Speed = GPIO_SPEED_FAST;         // port speed to fast
+	HAL_GPIO_Init(GPIOB, &ButtonUP);
 
-	conf.Mode = GPIO_MODE_IT_RISING;
-
-	HAL_GPIO_Init(GPIOA, &conf);          // call the HAL init
-
-	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
-
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x1F, 0x00);
 	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
 
 void EXTI15_10_IRQHandler() {
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_14);
 	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_15);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	if (TIM1 -> CCR1 <= 980) {
-		TIM1 -> CCR1 += 20;
+	if (GPIO_Pin == GPIO_PIN_14) {
+		TIM2->CCR1 >= 10 ? (TIM2->CCR1 -= 10) : (TIM2->CCR1 = 0);
+		printf("Slowing down! Status: %lu%\n", (unsigned)TIM2->CCR1 / 1000);
+		//HAL_Delay(50);
+	} else if (GPIO_Pin == GPIO_PIN_15) {
+		TIM2->CCR1 <= 990 ? (TIM2->CCR1 += 10) : (TIM2->CCR1 = 1000);
+		printf("Up! Status: %lu%\n", (unsigned)TIM2->CCR1 / 1000);
+		//HAL_Delay(50);
 	}
 }
 /**
