@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 using namespace std;
@@ -11,5 +10,31 @@ using namespace std;
 
 int main() {
 
-  return 0;
+    int count = 0;
+    float avg = 0;
+    int sum = 0;
+
+    cout << "How many numbers do you want to enter?" << endl;
+    cin >> count;
+
+    cout << endl;
+
+    int *array = new int [count]();
+
+    for(int i = 0; i < count; i++) {
+        cout << "Number" << i + 1 << ": ";
+        cin >> array[i];
+
+    sum = sum + array[i];
+    }
+
+    avg = (float)sum / count;
+
+    cout << endl;
+
+    cout << "The average of your numbers is: " << avg << "." << endl;
+
+    delete array;
+
+    return 0;
 }
