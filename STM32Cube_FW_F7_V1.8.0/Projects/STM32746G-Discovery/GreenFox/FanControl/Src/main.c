@@ -136,7 +136,6 @@ int main(void) {
 	printf("**********in Greg's Fan Control**********\r\n\n");
 	printf("Idling at: %lu%%\n", (unsigned)TIM2->CCR1 / 10);
 
-
 	//TimerIT();
 
 	while (1) {
@@ -161,16 +160,17 @@ void FANInit() {
 
 void TimerInit() {
 
-	__HAL_RCC_TIM2_CLK_ENABLE();
+		__HAL_RCC_TIM2_CLK_ENABLE();
 
 		TimHandle.Instance               = TIM2;
-		TimHandle.Init.Period            = 1000; //Max = 100%
-		TimHandle.Init.Prescaler         = 54000; //Using full speed 216MHz
+		TimHandle.Init.Period            = 1000; // Timer counts from 0 to 999
+		TimHandle.Init.Prescaler         = 20000; // The processor's frequency is divided by 20000
 		TimHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
 		TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
 
 		sConfig.OCMode = TIM_OCMODE_PWM1;
-		sConfig.Pulse =  250;
+		sConfig.Pulse =  250;					// Pulse 0 - 250 signal: 1, 251 - 999: signal: 0
+
 
 		HAL_TIM_PWM_Init(&TimHandle);
 		HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
@@ -233,12 +233,19 @@ void EXTI15_10_IRQHandler() {
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == GPIO_PIN_14) {
-		TIM2->CCR1 >= 10 ? (TIM2->CCR1 -= 10) : (TIM2->CCR1 = 0);
-		printf("Slowing down! Status: %lu%%\n", (unsigned)TIM2->CCR1 / 10);
+
+		TIM2 -> CCR1 >= 10 ? (TIM2 -> CCR1 -= 10) : (TIM2 -> CCR1 = 0);
+		//...decrease speed and not get outside the timer's "Period"
+
+		printf("Slowing down! Status: %lu%%\n", (unsigned)TIM2 -> CCR1 / 10);
 		//HAL_Delay(50);
 	} else if (GPIO_Pin == GPIO_PIN_15) {
-		TIM2->CCR1 <= 990 ? (TIM2->CCR1 += 10) : (TIM2->CCR1 = 1000);
-		printf("Speeding up! Status: %lu%%\n", (unsigned)TIM2->CCR1 / 10);
+
+		TIM2 -> CCR1 <= 990 ? (TIM2 -> CCR1 += 10) : (TIM2 -> CCR1 = 1000);
+		//...increase speed and not get outside the timer's "Period"
+
+
+		printf("Speeding up! Status: %lu%%\n", (unsigned)TIM2 -> CCR1 / 10);
 		//HAL_Delay(50);
 	}
 }
