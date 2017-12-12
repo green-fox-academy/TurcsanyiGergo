@@ -108,19 +108,29 @@ int main(void)
   UARTInit();
 
   uint8_t cmd = 0;
+  uint8_t buf = 0;
+  uint8_t temp = 0;
 
-  printf("Welcome to the Greg's temperature sensor!\n");
+  printf("Welcome to the Greg's weather station!\n\n");
 
   while (1)
   {
 	  HAL_I2C_Master_Transmit(&I2cHandle, 0b1001000 << 1, (uint8_t*) &cmd, 1, 0xFFFF);
 	  HAL_Delay(1000);
-	  HAL_I2C_Master_Receive(&I2cHandle, 0b1001000 << 1, (uint8_t*) &cmd, 1, 0xFFFF);
+	  HAL_I2C_Master_Receive(&I2cHandle, 0b1001000 << 1, (uint8_t*) &buf, 1, 0xFFFF);
 	  HAL_Delay(500);
 
-	  printf("The temperature is: %d°C.\n", cmd);
+	 //printf("The temperature is: %d°C.\n", buf);
 
-	  cmd = 0;
+	if (temp != buf) {
+
+		if (buf > temp)
+			printf("Temperature is: %d°C (Global warming ALERT!)\n", buf);
+		else
+			printf("Temperature is: %d°C (Ice age is coming!)\n", buf);
+
+		temp = buf;
+	}
   }
 }
 
